@@ -90,7 +90,7 @@ public class StoreDao {
 			System.out.print(m.get("staffName") + ", ");
 			System.out.print(m.get("addressId") + ", ");
 			System.out.print(m.get("staffAddress") + ", ");
-			System.out.print(m.get("lastUpdate") + ", ");
+			System.out.print(m.get("lastUpdate"));
 			System.out.println();
 		}
 	}
