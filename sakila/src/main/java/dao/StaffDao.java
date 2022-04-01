@@ -35,10 +35,12 @@ public class StaffDao {
 					+ "	CONCAT(sf.first_name, ' ', sf.last_name) staffName,"
 					+ "	sf.address_id addressId,"
 					+ "	CONCAT(a.address, IFNULL(a.address2, ''), a.district) staffAddress,"
+					+ "	sf.picture picture,"
 					+ "	sf.email email,"
 					+ "	sf.store_id storeId,"
 					+ "	sf.active active,"
 					+ " sf.username username,"
+					+ " sf.password password,"
 					+ "	sf.last_update lastUpdate"
 					+ " FROM staff sf INNER JOIN address a"
 					+ " ON sf.address_id = a.address_id;";
@@ -56,9 +58,11 @@ public class StaffDao {
 				map.put("staffName", rs.getString("staffName"));
 				map.put("addressId", rs.getInt("addressId"));
 				map.put("staffAddress", rs.getString("staffAddress"));
+				map.put("picture", rs.getString("picture"));
 				map.put("email", rs.getString("email"));
 				map.put("storeId", rs.getInt("storeId"));
 				map.put("active", rs.getInt("active"));
+				map.put("password", rs.getString("password"));
 				map.put("username", rs.getString("username"));
 				map.put("lastUpdate", rs.getString("lastUpdate"));
 				list.add(map);
@@ -93,9 +97,11 @@ public class StaffDao {
 			System.out.print(m.get("staffName") + ", ");
 			System.out.print(m.get("addressId") + ", ");
 			System.out.print(m.get("staffAddress") + ", ");
+			System.out.print(m.get("picture") + ", ");
 			System.out.print(m.get("email") + ", ");
 			System.out.print(m.get("storeId") + ", ");
 			System.out.print(m.get("active") + ", ");
+			System.out.print(m.get("password") + ", ");
 			System.out.print(m.get("username") + ", ");
 			System.out.print(m.get("lastUpdate"));
 			System.out.println();
