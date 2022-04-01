@@ -5,6 +5,7 @@ import java.sql.*;
 
 public class StoreDao {
 	
+	// storeList 출력 메서드
 	public List<Map<String, Object>> selectStoreList() {
 		// ArrayList는 List 인터페이스의 구현체 중 하나다. -> List가 ArrayList의 부모
 		// HashMap은 Map 인터페이스의 구현체 중 하나다. -> Map가 HashMap의 부모
@@ -20,9 +21,13 @@ public class StoreDao {
 		
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver"); // 드라이버 로딩
+			System.out.println("드라이버 로딩 완료"); // 디버깅
 			
-			conn = DriverManager.getConnection(dburl, dbuser, dbpw);
+			conn = DriverManager.getConnection(dburl, dbuser, dbpw); // DB 접속
+			System.out.println("conn : " +  conn); // 디버깅
+			
+			// storeList를 보여줄 쿼리
 			String sql = "SELECT"
 					+ "	s.store_id storeId,"
 					+ "	s.manager_staff_id staffId,"
@@ -34,10 +39,15 @@ public class StoreDao {
 					+ " INNER JOIN address a"
 					+ " ON s.manager_staff_id = sf.staff_id"
 					+ " AND s.address_id = a.address_id;";
-			stmt = conn.prepareStatement(sql);
-			rs = stmt.executeQuery();
+			
+			stmt = conn.prepareStatement(sql); // 접속한 DB에 쿼리 작성
+			System.out.println("stmt : " + stmt); // 디버깅
+			
+			rs = stmt.executeQuery(); // ResultSet 형식으로 쿼리 저장
+			System.out.println("rs : " + rs); // 디버깅
 			
 			while(rs.next()) {
+				// 정보들을 쿼리를 이용해 DB에서 가져온 후 list에 저장
 				Map<String, Object> map = new HashMap<>();
 				map.put("storeId", rs.getInt("storeId"));
 				map.put("staffId", rs.getInt("staffId"));
@@ -50,7 +60,7 @@ public class StoreDao {
 			
 		} catch (Exception e) {
 			e.printStackTrace(); // 오류 메세지 출력
-			System.out.println("Class.forName() 실행 중 ClassNotFoundException 발생");
+			System.out.println("예외 발생");
 		}finally {
 			try {
 				// DB 자원 해지
@@ -70,9 +80,10 @@ public class StoreDao {
 	
 	// 단위 테스트
 	public static void main(String[] args) {
-		StoreDao dao = new StoreDao();
-		List<Map<String, Object>> list = dao.selectStoreList();
+		StoreDao dao = new StoreDao(); // 출력 메서드 사용을 위한 객체 생성
+		List<Map<String, Object>> list = dao.selectStoreList(); // 출력 메서드를 사용 후 반환된 값이 List<Map<String, Object>>형이므로 객체를 만들어 저장
 		
+		// 출력 부분
 		for(Map m : list) {
 			System.out.print(m.get("storeId") + ", ");
 			System.out.print(m.get("staffId") + ", ");
