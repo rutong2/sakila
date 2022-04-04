@@ -12,13 +12,33 @@
 		<h1 class="text-center text-white">HOME</h1>
 			<table class="table table-bordered text-center table-striped table-dark">
 				<tr>
-					<td><a href="<%=request.getContextPath()%>/storeList.jsp">Store List</a></td>
+					<td><a href="<%=request.getContextPath()%>/storeList.jsp">StoreList</a></td>
 				</tr>
 				<tr>
-					<td><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></td>
+					<td><a href="<%=request.getContextPath()%>/staffList.jsp">StaffList</a></td>
+				</tr>
+				
+				<!-- 뷰 -->
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/actorInfoList.jsp">ActorInfoList(view)</a></td>
 				</tr>
 				<tr>
-					<td><a href="<%=request.getContextPath()%>/actorInfoList.jsp">ActorInfo List</a></td>
+					<td><a href="<%=request.getContextPath()%>/customerList.jsp">customerList(view)</a></td>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/filmList.jsp">filmList(view)</a></td>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/nicerButSlowerFilmList.jsp">nicerButSlowerFilmList(view)</a></td>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/salesByFilmCategoryList.jsp">salesByFilmCategoryList(view)</a></td>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/salesByStore.jsp">salesByStore(view)</a></td>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/staffListView.jsp">staffListView(view)</a></td>
 				</tr>
 			</table>
 	</div>

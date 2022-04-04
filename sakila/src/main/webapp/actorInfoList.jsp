@@ -43,10 +43,12 @@
 		
 		<table class="table table-bordered text-center table-striped table-dark">
 			<thead>
-				<th>actorId</th>
-				<th>firstName</th>
-				<th>lastName</th>
-				<th>filmInfo</th>
+				<tr>
+					<th>actorId</th>
+					<th>firstName</th>
+					<th>lastName</th>
+					<th>filmInfo</th>
+				</tr>
 			</thead>
 			<tbody>
 				<%
