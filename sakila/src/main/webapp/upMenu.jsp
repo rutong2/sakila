@@ -3,4 +3,5 @@
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/index.jsp">홈으로</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/storeList.jsp">StoreList</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/staffList.jsp">StaffList</a>
+	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/actorInfoList.jsp">actorInfoList</a>
 </div>

@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>Index</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -16,6 +16,9 @@
 				</tr>
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></td>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/actorInfoList.jsp">ActorInfo List</a></td>
 				</tr>
 			</table>
 	</div>
