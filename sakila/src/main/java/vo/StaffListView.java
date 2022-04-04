@@ -1,6 +1,6 @@
 package vo;
 
-public class StaffList {
+public class StaffListView {
 	private int id;
 	private String name;
 	private String address;
@@ -12,7 +12,7 @@ public class StaffList {
 	
 	@Override
 	public String toString() {
-		return "StaffList [id=" + id + ", name=" + name + ", address=" + address + ", zipCode=" + zipCode + ", phone="
+		return "StaffListView [id=" + id + ", name=" + name + ", address=" + address + ", zipCode=" + zipCode + ", phone="
 				+ phone + ", city=" + city + ", country=" + country + ", sid=" + sid + "]";
 	}
 

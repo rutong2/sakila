@@ -28,7 +28,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>filmList</title>
+	<title>nicerButSlowerFilmList</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>

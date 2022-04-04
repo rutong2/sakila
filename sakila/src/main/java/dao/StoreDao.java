@@ -16,12 +16,7 @@ public class StoreDao {
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		
-		String dburl = "jdbc:mariadb://localhost:3306/sakila"; // DB 주소
-		String dbuser = "root"; // DB 아이디
-		String dbpw = "java1234"; // DB 패스워드
-		
+		ResultSet rs = null;		
 		
 		try {
 			conn = DBUtil.getConnection();

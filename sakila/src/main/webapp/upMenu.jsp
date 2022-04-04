@@ -8,6 +8,6 @@
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/filmList.jsp">FilmList</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/nicerButSlowerFilmList.jsp">NicerButSlowerFilmList</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/salesByFilmCategoryList.jsp">SalesByFilmCategoryList</a>
-	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/salesByStore.jsp">SalesByStore</a>
+	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/salesByStoreList.jsp">SalesByStore</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/staffListView.jsp">StaffListView</a>
 </div>
