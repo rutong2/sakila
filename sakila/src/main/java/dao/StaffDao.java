@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import util.DBUtil;
+
 public class StaffDao {
 	
 	// staffList 출력
@@ -18,16 +20,10 @@ public class StaffDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		String dburl = "jdbc:mariadb://localhost:3306/sakila"; // DB 주소
-		String dbuser = "root"; // DB 아이디
-		String dbpw = "java1234"; // DB 패스워드
+
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver"); // 드라이버 접속
-			System.out.println("드라이버 로딩 완료"); // 디버깅
-			
-			conn = DriverManager.getConnection(dburl, dbuser, dbpw); // DB 접속
-			System.out.println("conn : " + conn); // 디버깅
+			conn = DBUtil.getConnection();
 			
 			// staffList 출력 쿼리
 			String sql = "SELECT"

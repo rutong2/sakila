@@ -1,6 +1,9 @@
 package dao;
 
 import java.util.*;
+
+import util.DBUtil;
+
 import java.sql.*;
 
 public class StoreDao {
@@ -21,11 +24,7 @@ public class StoreDao {
 		
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver"); // 드라이버 로딩
-			System.out.println("드라이버 로딩 완료"); // 디버깅
-			
-			conn = DriverManager.getConnection(dburl, dbuser, dbpw); // DB 접속
-			System.out.println("conn : " +  conn); // 디버깅
+			conn = DBUtil.getConnection();
 			
 			// storeList를 보여줄 쿼리
 			String sql = "SELECT"
