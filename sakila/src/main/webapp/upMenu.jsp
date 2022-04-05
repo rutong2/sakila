@@ -10,4 +10,7 @@
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/salesByFilmCategoryList.jsp">SalesByFilmCategoryList</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/salesByStoreList.jsp">SalesByStore</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/staffListView.jsp">StaffListView</a>
+	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/filmInStockForm.jsp">filmInstock</a>
+	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/filmNotInStockForm.jsp">filmNotInStock</a>
+	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/rewardsReportForm.jsp">rewardsReport</a>
 </div>

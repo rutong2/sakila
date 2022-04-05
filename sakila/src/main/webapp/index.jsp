@@ -40,6 +40,17 @@
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/staffListView.jsp">staffListView(view)</a></td>
 				</tr>
+				
+				<!-- 프로시저 -->
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/filmInStockForm.jsp">filmInstock(procedures)</a></td>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/filmNotInStockForm.jsp">filmNotInStock(procedures)</a></td>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/rewardsReportForm.jsp">rewardsReport(procedures)</a></td>
+				</tr>
 			</table>
 	</div>
 </body>
