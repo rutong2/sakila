@@ -418,6 +418,209 @@ public class FilmDao {
 		return list;
 	}
 	
+	public int selectFilmListTotalRow(String category, String rating, double price, int length, String title, String actor) {
+		int row = 0;
+		// 자원 준비
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		conn = DBUtil.getConnection(); // DB접속
+		try {
+			String sql = "SELECT COUNT(*) cnt FROM film_list WHERE title LIKE ? AND actors LIKE ?";
+			// ------------------- 아무것도 선택되지 않았을때 -------------------
+			if(category.equals("") && rating.equals("") && price==-1 && length==-1) {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, "%"+title+"%");
+				stmt.setString(2, "%"+actor+"%");
+			} 
+			// ------------------- 1개가 선택됐을때 -------------------  (4가지)
+			else if(category.equals("") && rating.equals("") && price==-1 && length!=-1) { // length 선택
+				if(length == 0) {
+					sql += " AND length<60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+				} else if(length == 1) {
+					sql += " AND length>=60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+				}
+			} else if(category.equals("") && rating.equals("") && price!=-1 && length==-1) { // price 선택
+				sql += " AND price=?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, "%"+title+"%");
+				stmt.setString(2, "%"+actor+"%");
+				stmt.setDouble(3, price);
+			} else if(category.equals("") && !rating.equals("") && price==-1 && length==-1) { // rating 선택
+				sql += " AND rating=?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, "%"+title+"%");
+				stmt.setString(2, "%"+actor+"%");
+				stmt.setString(3, rating);
+			} else if(!category.equals("") && rating.equals("") && price==-1 && length==-1) { // category 선택
+				sql += " AND category=?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, "%"+title+"%");
+				stmt.setString(2, "%"+actor+"%");
+				stmt.setString(3, category);
+			} 
+			// ------------------- 2개가 선택됐을때 -------------------  (6가지)
+			else if(category.equals("") && rating.equals("") && price!=-1 && length!=-1) { // category, rating 선택
+				if(length == 0) {
+					sql += " AND price=? AND length<60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setDouble(3, price);
+				} else if(length == 1) {
+					sql += " AND price=? AND length>=60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setDouble(3, price);
+				}
+			} else if(category.equals("") && !rating.equals("") && price==-1 && length!=-1) { // category, price 선택
+				if(length == 0) {
+					sql += " AND rating=? AND length<60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, rating);
+				} else if(length == 1) {
+					sql += " AND rating=? AND length>=60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, rating);
+				}
+			} else if(!category.equals("") && rating.equals("") && price==-1 && length!=-1) { // rating, price 선택
+				if(length == 0) {
+					sql += " AND category=? AND length<60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, category);
+				} else if(length == 1) {
+					sql += " AND category=? AND length>=60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, category);
+				}
+			} else if(category.equals("") && !rating.equals("") && price!=-1 && length==-1) { // category, length 선택
+				sql += " AND rating=? AND price=?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, "%"+title+"%");
+				stmt.setString(2, "%"+actor+"%");
+				stmt.setString(3, rating);
+				stmt.setDouble(4, price);
+			} else if(!category.equals("") && rating.equals("") && price!=-1 && length==-1) { // rating, length 선택
+				sql += " AND category=? AND price=?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, "%"+title+"%");
+				stmt.setString(2, "%"+actor+"%");
+				stmt.setString(3, category);
+				stmt.setDouble(4, price);
+			} else if(!category.equals("") && !rating.equals("") && price==-1 && length==-1) { // price, length 선택
+				sql += " AND category=? AND rating=?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, "%"+title+"%");
+				stmt.setString(2, "%"+actor+"%");
+				stmt.setString(3, category);
+				stmt.setString(4, rating);
+			} 
+			// ------------------- 3개가 선택됐을때 ------------------- (4가지)
+			else if(!category.equals("") && !rating.equals("") && price!=-1 && length==-1) { // length 선택 X
+				sql += " AND category=? AND rating=? AND price=?";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, "%"+title+"%");
+				stmt.setString(2, "%"+actor+"%");
+				stmt.setString(3, category);
+				stmt.setString(4, rating);
+				stmt.setDouble(5, price);
+			} else if(!category.equals("") && !rating.equals("") && price==-1 && length!=-1) { // price 선택 X
+				if(length == 0) {
+					sql += " AND category=? AND rating=? AND length<60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, category);
+					stmt.setString(4, rating);
+				} else if(length == 1) {
+					sql += " AND category=? AND rating=? AND length>=60?";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, category);
+					stmt.setString(4, rating);
+				}
+			} else if(!category.equals("") && rating.equals("") && price!=-1 && length!=-1) { // rating 선택 X
+				if(length == 0) {
+					sql += " AND category=? AND price=? AND length<60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, category);
+					stmt.setDouble(4, price);
+				} else if(length == 1) {
+					sql += " AND category=? AND price=? AND length>=60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, category);
+					stmt.setDouble(4, price);
+				}
+			} else if(category.equals("") && !rating.equals("") && price!=-1 && length!=-1) { // category 선택 X
+				if(length == 0) {
+					sql += " AND rating=? AND price=? AND length<60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, rating);
+					stmt.setDouble(4, price);
+				} else if(length == 1) {
+					sql += " AND rating=? AND price=? AND length>=60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, rating);
+					stmt.setDouble(4, price);
+				}
+			}
+			// ------------------- 모두 선택됐을때 -------------------
+			else {
+				if(length == 0) {
+					sql += " AND category=? AND rating=? AND price=? AND length<60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, category);
+					stmt.setString(4, rating);
+					stmt.setDouble(5, price);
+				} else if(length == 1) {
+					sql += " AND category=? AND rating=? AND price=? AND length>=60";
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, "%"+title+"%");
+					stmt.setString(2, "%"+actor+"%");
+					stmt.setString(3, category);
+					stmt.setString(4, rating);
+					stmt.setDouble(5, price);
+				}
+			}
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				row = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return row;
+	}
+	
 	public static void main(String[] args) {
 		FilmDao filmDao = new FilmDao();
 		int filmId = 2;

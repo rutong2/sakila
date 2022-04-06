@@ -10,6 +10,8 @@
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
+	
+	System.out.println("currentPage : " + currentPage); // 디버깅
 
 	// 사용자가 선택한 값 받아오기
 	String category = request.getParameter("category");
@@ -36,11 +38,23 @@
 	System.out.println("title : " + title);
 	System.out.println("actor : " + actor);
 	
+	// 페이징
+	FilmDao filmDao = new FilmDao(); // 메서드 사용을 위한 객체 생성
 	int rowPerPage = 10; // 내가 보고싶은 정보량
-	int beginRow = (currentPage-1)/rowPerPage; // 시작하는 행 번호
+	int beginRow = (currentPage - 1) * rowPerPage; // 시작하는 행 번호
+	int totalRow = filmDao.selectFilmListTotalRow(category, rating, price, length, title, actor); // 사용자가 선택한 조건의 전체 행의 수
+	int lastPage = 0; // 마지막 페이지
+	System.out.println("beginRow : " + beginRow);
+	
+	if(totalRow%rowPerPage==0) { // 정보가 다 출력됐으면
+		lastPage = totalRow/rowPerPage;
+	} else { // 아직 출력되지 않은 정보가 있으면
+		lastPage = (totalRow/rowPerPage)+1;
+	}
+	System.out.println("totalRow : " + totalRow);
+	System.out.println("lastPage : " + lastPage);
 	
 	// 메서드를 이용해 출력
-	FilmDao filmDao = new FilmDao(); // 검색한 영화 정보 출력 메서드 사용을 위한 객체 생성
 	List<FilmList> list = filmDao.selectFilmListSearch(beginRow, rowPerPage, category, rating, price, length, title, actor);
 %>
 <!DOCTYPE html>
@@ -85,6 +99,23 @@
 					}
 				%>
 			</tbody>
+			<div>
+				<ul class="pagination">
+					<%
+						if(currentPage > 1) {
+					%>
+							<li class="page-item"><a class="page-link float-left" href="<%=request.getContextPath()%>/filmSearchAction.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">이전</a></li>
+					<%		
+						}
+					
+						if(currentPage < lastPage) {
+					%>
+							<li class="page-item"><a class="page-link float-left" href="<%=request.getContextPath()%>/filmSearchAction.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">다음</a></li>
+					<%		
+						}
+					%>
+				</ul>
+			</div>
 		</table>
 	</div>
 </body>
