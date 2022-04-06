@@ -126,6 +126,36 @@ public class FilmDao {
 		return firstMap;
 	}
 	
+	public List<Double> selectFilmPriceList() {
+		List<Double> list = new ArrayList<Double>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		conn = DBUtil.getConnection();
+		
+		String sql = "SELECT DISTINCT price FROM film_list ORDER BY price";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getDouble("price"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	public static void main(String[] args) {
 		FilmDao filmDao = new FilmDao();
 		int filmId = 2;
