@@ -7,6 +7,37 @@ import util.DBUtil;
 import java.sql.*;
 
 public class StoreDao {
+	public List<Integer> selectStoreIdList() {
+		List<Integer> list = new ArrayList<Integer>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		conn = DBUtil.getConnection();
+		
+		try {
+			String sql = "SELECT store_id storeId FROM store";
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getInt("storeId"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// 자원 반납
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
 	
 	// storeList 출력 메서드
 	public List<Map<String, Object>> selectStoreList() {

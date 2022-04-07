@@ -14,4 +14,5 @@
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/filmNotInStockForm.jsp">filmNotInStock</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/rewardsReportForm.jsp">rewardsReport</a>
 	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/filmSearchForm.jsp">filmSearch</a>
+	<a class="btn btn-secondary" href="<%=request.getContextPath()%>/rentalSearchForm.jsp">rentalSearch</a>
 </div>

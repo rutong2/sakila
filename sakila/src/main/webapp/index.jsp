@@ -36,7 +36,8 @@
 		<!-- 상세검색 -->
 		<h2 class="text-white">상세검색</h2>
 		<ol class="text-white">
-			<li><a href="<%=request.getContextPath()%>/filmSearchForm.jsp">filmSearchForm</a></li>
+			<li><a href="<%=request.getContextPath()%>/filmSearchForm.jsp">영화 상세검색</a></li>
+			<li><a href="<%=request.getContextPath()%>/rentalSearchForm.jsp">대여 상세검색</a></li>
 		</ol>
 	</div>
 </body>
