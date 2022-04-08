@@ -16,8 +16,14 @@
 		System.out.println("storeId : " + storeId);
 	}
 	String customerName = request.getParameter("customerName");
-	String beginDate = request.getParameter("beginDate");
-	String endDate = request.getParameter("endDate");
+	String beginDate = "1900-01-01";
+	String endDate = "2022-04-07";
+	if(request.getParameter("beginDate") != null) {
+		beginDate = request.getParameter("beginDate");
+	}
+	if(request.getParameter("endDate") != null) {
+		endDate = request.getParameter("endDate");
+	}
 	
 	// 디버깅
 	System.out.println("storeId : " + storeId);

@@ -48,7 +48,7 @@ public class RentalDao {
 					stmt.setInt(3, beginRow);
 					stmt.setInt(4, rowPerPage);
 				}
-			} else if(!beginDate.equals("") && !endDate.equals("")) { // 대여날짜가 선택됐을때
+			} else if(!beginDate.equals("") || !endDate.equals("")) { // 대여날짜가 선택됐을때
 				if(storeId == -1) { // 모든 가게 보여줄때
 					sql += " AND r.rental_date BETWEEN STR_TO_DATE(?,'%Y-%m-%d') AND STR_TO_DATE(?,'%Y-%m-%d') ORDER BY rental_id LIMIT ?, ?";
 					stmt = conn.prepareStatement(sql);
@@ -127,7 +127,7 @@ public class RentalDao {
 					stmt.setString(1, "%"+customerName+"%");
 					stmt.setInt(2, storeId);
 				}
-			} else if(!beginDate.equals("") && !endDate.equals("")) { // 대여날짜가 선택됐을때
+			} else if(!beginDate.equals("") || !endDate.equals("")) { // 대여날짜가 선택됐을때
 				if(storeId == -1) { // 모든 가게 보여줄때
 					sql += " AND r.rental_date BETWEEN STR_TO_DATE(?,'%Y-%m-%d') AND STR_TO_DATE(?,'%Y-%m-%d')";
 					stmt = conn.prepareStatement(sql);
@@ -137,7 +137,7 @@ public class RentalDao {
 				} else if(storeId != -1) { // 특정 상점 보여줄때
 					sql += " AND s.store_id=? AND r.rental_date BETWEEN STR_TO_DATE(?,'%Y-%m-%d') AND STR_TO_DATE(?,'%Y-%m-%d')";
 					stmt = conn.prepareStatement(sql);
-					stmt.setString(1, "%"+customerName+"%");
+					stmt.setString(1, customerName);
 					stmt.setInt(2, storeId);
 					stmt.setString(3, beginDate);
 					stmt.setString(4, endDate);
